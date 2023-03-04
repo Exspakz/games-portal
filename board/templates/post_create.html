@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+
+
+{% block title %}
+Post create
+{% endblock title %}
+
+{% block content %}
+    <br>
+
+    <h1>Post Create</h1>
+
+    <br>
+
+    <form action="" method="post">
+        {% csrf_token %}
+
+        {{ form.media }}
+        {{ form.as_p }}
+
+        <input type="submit" value="Save">
+    </form>
+{% endblock content %}

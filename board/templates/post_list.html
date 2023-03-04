@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Posts
+{% endblock title %}
+
+{% block content %}
+
+    <br>
+
+    <h1 class="text-center"> Post List <span class="text-muted fs-6 fw-normal">All posts: {{ page_obj.paginator.count }}</span></h1>
+
+    <hr>
+
+    <ul class="list-group list-group-flush">
+        {%  for post in posts %}
+            <li class="text-lg-start list-group-item">
+                <small class="fw-bold">{{ post.date_creation|date:'d.M.Y' }}</small>
+                <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+                <small class="text-muted">(Author: {{ post.user }})</small>
+                <small class="fw-bold">Category: {{ post.get_category_display }}</small>
+                <p>{{ post.preview|truncatechars:210 }}</p>
+            </li>
+        {% empty %}
+            <h2>No posts!</h2>
+        {% endfor %}
+    </ul>
+
+        {% if page_obj.has_previous %}
+            <a href="?page=1">1</a>
+            {% if page_obj.previous_page_number != 1 %}
+                ...
+                <a href ="?page={{ page_obj.previous_page_number }}">
+                    {{ page_obj.previous_page_number }}
+                </a>
+            {% endif %}
+        {% endif %}
+
+        {{ page_obj.number }}
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">
+                {{ page_obj.next_page_number }}
+            </a>
+            {% if page_obj.next_page_number != paginator.num_pages %}
+                ...
+                <a href="?page={{ paginator.num_pages }}">
+                    {{ paginator.num_pages }}
+                </a>
+            {% endif %}
+        {% endif %}
+
+{% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User comments posts
+{% endblock title %}
+
+{% block content %}
+    <br>
+    <h1>User Comments Posts</h1>
+    <h1>Hello, {{ request.user }}</h1>
+    <br>
+
+    <form action="" method="get">
+        {{ filterset.form.as_p }}
+        <input type="submit" value="Search">
+    </form>
+
+    <hr>
+
+    <ul class="list-group list-group-flush">
+        {% for comment in user_posts_comments %}
+            <li class="text-lg-start list-group-item">
+                <small class="fw-bold">{{ comment.date_creation|date:'d.M.Y' }}</small>
+                <small class="text-muted">(Author: {{ comment.user }})</small>
+                {% if not comment.is_accept %}
+                    <a class="" href="{% url 'accept_comment' comment.id %}"><strong>Accept comment</strong></a>
+                {% endif %}
+                <a class="text-dark" href="{% url 'comment_delete' comment.id %}"><strong>Delete comment</strong></a>
+                <p>{{ comment.text }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

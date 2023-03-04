@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Games Portal
+{% endblock title %}
+
+{% block content %}
+
+    <br>
+    <h1><span style="color: #0000ff;">{{ current_time }}</span></h1>
+    <hr size="2">
+    <h1>Welcome To The<br>Games Portal</h1>
+    <hr size="2">
+
+    <div>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <h3><a class="nav-link" href="{% url 'post_list' %}"> All Posts </a></h3>
+            </li>
+            <li class="nav-item">
+                <h3><a class="nav-link" href="{% url 'post_create' %}"> Create Post </a></h3>
+            </li>
+            <li class="nav-item">
+                <h3><a class="nav-link" href="{% url 'user_posts' %}"> Update Post </a></h3>
+            </li>
+        </ul>
+    </div>
+{% endblock content %}

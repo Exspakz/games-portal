@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans 'Document' %}</title>
+</head>
+<body>
+    <h2>{% trans 'New post' %} "{{ title }}" </h2>
+    <p>
+        {% trans 'Hello' %}, {{ name }}! {% trans 'New post' %} "{{ title }}" {% trans 'in your favorite category' %}!<br>
+        {{ text|truncatechars:100 }} <a href="{{ link }}">{% trans 'link to the post' %}</a>
+    </p>
+</body>
+</html>

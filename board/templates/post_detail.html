@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ post }}
+{% endblock title %}
+
+{% block content %}
+    <br>
+
+    <h1 class="text-center"> {{ post.title }} </h1>
+    {{ post.content|safe }}
+
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for f in form %}
+            <p>
+                <input type="text" name="{{ f.name }}" id="{{ f.id_for_label }}" placeholder="{{ f.label }}" class="form-control form-control-lg">
+            </p>
+        {% endfor %}
+        <input type="submit" value="Leave a comment">
+    </form>
+
+    <hr>
+
+    <ul class="list-group list-group-flush">
+        {%  for comment in comments %}
+            {% if comment.is_accept %}
+                <li class="text-lg-start list-group-item">
+                    <small class="fw-bold">{{ comment.date_creation|date:'d.M.Y' }}</small>
+                    <small class="text-muted">(Author: {{ comment.user }})</small>
+                    <p>{{ comment.text }}</p>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
